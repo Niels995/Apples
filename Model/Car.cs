@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    internal class Car
+    public class Car
     {
+        public static IEquipment Equipment { get; set; }
+        public static IEquipment Equipments(int quality, int performance, int speed)
+        {
+            Equipment.Quality = quality;
+            Equipment.Performance = performance;
+            Equipment.Speed = speed;
+            return Equipment;
+        }
     }
 }
