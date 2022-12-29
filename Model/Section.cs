@@ -8,17 +8,26 @@ namespace Model
 {
     public enum SectionTypes
     {
-        Straight,
-        LeftCorner,
-        RightCorner,
-        StartGrid,
-        Finish,
+        Straight = 2,
+        Vertical = 3,
+        LeftCorner = 6,
+        RightCorner = 8,
+        StartGrid = 4,
+        Finish = 5,
     }
     public class Section
     {
+        public int X { get; set; } = 0;
+        public int Y { get; set; } = 0;
+        public int Compass { get; set; } = 1;
         public SectionTypes SectionType { get; set; }
-        public Section(SectionTypes sectionTypes) {
+        public SectionData SectionData { get; set; }
+        public Section(SectionTypes sectionTypes,int x, int y, int compass) {
             SectionType = sectionTypes;
+            X = x;
+            Y = y;
+            Compass = compass;
+            SectionData = new SectionData();
         }
 
     }
