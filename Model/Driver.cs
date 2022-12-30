@@ -21,5 +21,9 @@ namespace Model
         public int Points { get; set; }
         public IEquipment Equipment { get; set; }
         public TeamColors Teamcolors { get; set; }
+        public int Quality { get ; set ; }
+        public int Performance { get ; set; }
+        public int Speed { get; set; }
+        public int Finished { get; set; }
     }
 }

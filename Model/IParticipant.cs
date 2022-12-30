@@ -14,12 +14,13 @@ namespace Model
         Grey,
         Blue
     }
-    public interface IParticipant
+    public interface IParticipant : IEquipment
     {
 
         string Name { get; set; }
         int Points { get; set; }
         IEquipment Equipment { get; set; }
         TeamColors Teamcolors { get; set; }
+        int Finished { get; set; }
     }
 }

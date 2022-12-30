@@ -38,9 +38,10 @@ namespace Controller
             return _positions[section];
         }
         public Race(Track track, List<IParticipant> participant) {
-            _random = new Random(DateTime.Now.Millisecond);
+            _random = new Random();
             Track = track;
             Participants = participant;
+            RandomizeEquipment();
             _positions = new Dictionary<Section, SectionData>();
             Console.ForegroundColor = ConsoleColor.White;
             setParticipants(track);
@@ -62,17 +63,20 @@ namespace Controller
             Timer.Enabled = true;
         }
 
-        public IEquipment RandomizeEquipment()
+        public void RandomizeEquipment()
         {
-            Car.Equipment.Quality = _random.Next(1000);
-            Car.Equipment.Performance = _random.Next(1000);
-            Car.Equipment.Speed = _random.Next(1000);
-            return Car.Equipment;
+            foreach (IParticipant part in Participants)
+            {
+                part.Quality = _random.Next(1, 11);
+                part.Performance = _random.Next(1, 11);
+                part.Speed = _random.Next(1, 4);
+                part.Finished = -1;
+            }
         }
         public string StartRace(int xStart, int yStart, Track track) {
             x = xStart;
             y = yStart;
-            Visual.Visualise(xStart,yStart,track);
+            Graphics.Visualise(xStart,yStart,track);
             Console.ForegroundColor = ConsoleColor.Green;
             return Participants.First().Name;
         }
@@ -135,8 +139,13 @@ namespace Controller
             {
                 Track = Move(track, part);
             }
-            if (Finished == Participants.Count() * 2) { 
-                
+            if (Finished == Participants.Count() * 2) {
+                foreach (IParticipant part in Participants) {
+                    part.Finished = 0;
+                }
+                Console.Clear();
+                Graphics.reset();
+                Data.NextRace();
             }
         }
         public Track Move(Track track ,IParticipant part) {
@@ -163,6 +172,10 @@ namespace Controller
                         secnumberL = L;
                         if (sec.SectionType == SectionTypes.Finish) {
                             Finished++;
+                            part.Finished++;
+                            if (part.Finished == 1) { 
+                                sec.SectionData.Left = null;
+                            }
                         }
                         if (secnumberL == track.Sections.Count - 1)
                         {
@@ -197,6 +210,10 @@ namespace Controller
                         if (sec.SectionType == SectionTypes.Finish)
                         {
                             Finished++;
+                            if (part.Finished == 1)
+                            {
+                                sec.SectionData.Left = null;
+                            }
                         }
                         if (secnumberR == track.Sections.Count - 1)
                             {

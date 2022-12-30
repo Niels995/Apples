@@ -2,6 +2,7 @@
 using Controller;
 Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
 Console.SetWindowPosition(0, 0);
+Data.Initialize();
 Visual.Initialize();
 //Data.NextRace();
 //Console.WriteLine(Data.CurrentRace.Track.Name);

@@ -10,8 +10,19 @@ using System.Threading.Tasks;
 
 namespace Controller
 {
-    internal class Graphics
+    public class Graphics
     {
+        private static Track _trackTest;
+        private static Track _trackTest1;
+        private static int Compass = 1;
+        private static int HeightInts = 0;
+        private static int WidthInts = 0;
+
+        private static int SmallestHeightInts = 0;
+        private static int SmallestWidthInts = 0;
+
+        private static int HeighestHeightInts = 0;
+        private static int HeighestWidthInts = 0;
         enum dir
         {
             north,
@@ -21,8 +32,188 @@ namespace Controller
             crash
         }
 
-        enum graphic { 
-            
+        public static int Visualise(int xStart, int yStart, Track track)
+        {
+            foreach (Section s in track.Sections)
+            {
+                int _currentsection = Convert.ToInt32(s.SectionType);
+            }
+            int[] ints = new int[track.Sections.Count() + 1];
+            int a = 0;
+            foreach (var section in track.Sections)
+            {
+                a++;
+                ints[a] = Convert.ToInt32(section.SectionType);
+            }
+            checkPathVisual(track);
+            Console.SetCursorPosition(-HeighestWidthInts + 15, -SmallestHeightInts + 8 + 3);
+            TrackPrint = new int[50, 60];
+            checkPathVisual(track);
+            return 0;
+        }
+        public static void reset() {
+            TrackPrint = null;
+            Compass = 1;
+            HeightInts = 0;
+            WidthInts = 0;
+
+            SmallestHeightInts = 0;
+            SmallestWidthInts = 0;
+
+            HeighestHeightInts = 0;
+            HeighestWidthInts = 0;
+        }
+
+        public static void checkPathVisual(Track track1)
+        {
+            SectionTypes[] sections = { SectionTypes.StartGrid };
+            Track _trackFinal = new Track("TestDing idk", sections);
+            if (TrackPrint is not null)
+            {
+                WidthInts = -HeighestWidthInts;
+                HeightInts = -SmallestHeightInts;
+            }
+            foreach (Section sec in track1.Sections)
+            {
+                int check = Convert.ToInt32(sec.SectionType);
+                if (TrackPrint is not null)
+                {
+                }
+                switch (check)
+                {
+                    case 2:
+                    case 4:
+                    case 5:
+                        if (Compass == 1)
+                        {
+                            WidthInts++;
+                            if (HeighestWidthInts > WidthInts)
+                            {
+                                HeighestWidthInts = WidthInts;
+                            }
+                            if (TrackPrint is not null)
+                            {
+                                _trackFinal.SectionList(sec.SectionType, HeightInts, WidthInts, Compass);
+                                Graphics.printall(check, HeightInts, WidthInts, Compass, sec); 
+                                TrackPrint[HeightInts, WidthInts] = check;
+                            }
+                        }
+                        if (Compass == 3)
+                        {
+                            WidthInts--;
+                            if (SmallestWidthInts < WidthInts)
+                            {
+                                SmallestWidthInts = WidthInts;
+                            }
+                            if (TrackPrint is not null)
+                            {
+                                _trackFinal.SectionList(sec.SectionType, HeightInts, WidthInts, Compass);
+                                Graphics.printall(check, HeightInts, WidthInts, Compass, sec);
+                                TrackPrint[HeightInts, WidthInts] = check;
+                            }
+                        }
+                        break;
+                    case 3:
+                        if (Compass == 0)
+                        {
+                            HeightInts--;
+                            if (SmallestHeightInts > HeightInts)
+                            {
+                                SmallestHeightInts = HeightInts;
+                            }
+                            if (TrackPrint is not null)
+                            {
+                                _trackFinal.SectionList(sec.SectionType, HeightInts, WidthInts, Compass);
+                                Graphics.printall(check, HeightInts, WidthInts, Compass, sec);
+                                TrackPrint[HeightInts, WidthInts] = check;
+                            }
+                        }
+                        if (Compass == 2)
+                        {
+                            HeightInts++;
+                            if (HeighestHeightInts < HeightInts)
+                            {
+                                HeighestHeightInts = HeightInts;
+                            }
+                            if (TrackPrint is not null)
+                            {
+                                _trackFinal.SectionList(sec.SectionType, HeightInts, WidthInts, Compass);
+                                Graphics.printall(check, HeightInts, WidthInts, Compass, sec);
+                                TrackPrint[HeightInts, WidthInts] = check;
+                            }
+                        }
+                        break;
+                    case 6:
+                    case 8:
+                        if (Compass == 0)
+                        {
+                            HeightInts--;
+                            if (SmallestHeightInts > HeightInts)
+                            {
+                                SmallestHeightInts = HeightInts;
+                            }
+                            if (TrackPrint is not null)
+                            {
+                                _trackFinal.SectionList(sec.SectionType, HeightInts, WidthInts, Compass);
+                                Graphics.printall(check, HeightInts, WidthInts, Compass, sec);
+                                TrackPrint[HeightInts, WidthInts] = check;
+                            }
+                        }
+                        if (Compass == 2)
+                        {
+                            HeightInts++;
+                            if (HeighestHeightInts < HeightInts)
+                            {
+                                HeighestHeightInts = HeightInts;
+                            }
+                            if (TrackPrint is not null)
+                            {
+                                _trackFinal.SectionList(sec.SectionType, HeightInts, WidthInts, Compass);
+                                Graphics.printall(check, HeightInts, WidthInts, Compass, sec);
+                                TrackPrint[HeightInts, WidthInts] = check;
+                            }
+                        }
+                        if (Compass == 1)
+                        {
+                            WidthInts++;
+                            if (HeighestWidthInts > WidthInts)
+                            {
+                                HeighestWidthInts = WidthInts;
+                            }
+                            if (TrackPrint is not null)
+                            {
+                                _trackFinal.SectionList(sec.SectionType, HeightInts, WidthInts, Compass);
+                                Graphics.printall(check, HeightInts, WidthInts, Compass, sec);
+                                TrackPrint[HeightInts, WidthInts] = check;
+                            }
+                        }
+                        if (Compass == 3)
+                        {
+                            WidthInts--;
+                            if (SmallestWidthInts < WidthInts)
+                            {
+                                SmallestWidthInts = WidthInts;
+                            }
+                            if (TrackPrint is not null)
+                            {
+                                _trackFinal.SectionList(sec.SectionType, HeightInts, WidthInts, Compass);
+                                Graphics.printall(check, HeightInts, WidthInts, Compass, sec);
+                                TrackPrint[HeightInts, WidthInts] = check;
+                            }
+                        }
+                        if (check == 8)
+                        {
+                            Compass++;
+                            if (Compass == 4) { Compass = 0; }
+                        }
+                        if (check == 6)
+                        {
+                            Compass--;
+                            if (Compass == -1) { Compass = 3; }
+                        }
+                        break;
+                }
+            }
         }
 
         public static int[] track1;
@@ -80,6 +271,9 @@ namespace Controller
             }
         }
         public static void printall(int sec, int x, int y, int comp, Section section) {
+            section.Y = WidthInts;
+            section.X = HeightInts;
+            section.Compass = Compass;
             Corner(sec, x , y, comp, section);
         }
 
