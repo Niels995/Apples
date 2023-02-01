@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="BackgroundGraphics\**" />
+    <Compile Remove="Factuur\**" />
+    <Compile Remove="Graphics\**" />
+    <Compile Remove="Icon\**" />
+    <EmbeddedResource Remove="BackgroundGraphics\**" />
+    <EmbeddedResource Remove="Factuur\**" />
+    <EmbeddedResource Remove="Graphics\**" />
+    <EmbeddedResource Remove="Icon\**" />
+    <None Remove="BackgroundGraphics\**" />
+    <None Remove="Factuur\**" />
+    <None Remove="Graphics\**" />
+    <None Remove="Icon\**" />
+    <Page Remove="BackgroundGraphics\**" />
+    <Page Remove="Factuur\**" />
+    <Page Remove="Graphics\**" />
+    <Page Remove="Icon\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <COMReference Include="MSHTML">
+      <VersionMinor>0</VersionMinor>
+      <VersionMajor>4</VersionMajor>
+      <Guid>3050f1c5-98b5-11cf-bb82-00aa00bdce0b</Guid>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>false</Isolated>
+      <EmbedInteropTypes>true</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Controller\Controller.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1462.37" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+    <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+  </ItemGroup>
+
+</Project>

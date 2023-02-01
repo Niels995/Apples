@@ -22,5 +22,6 @@ namespace Model
         IEquipment Equipment { get; set; }
         TeamColors Teamcolors { get; set; }
         int Finished { get; set; }
+        int CurrentSection { get; set; }
     }
 }

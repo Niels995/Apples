@@ -46,7 +46,7 @@ namespace Controller
                 ints[a] = Convert.ToInt32(section.SectionType);
             }
             checkPathVisual(track);
-            Console.SetCursorPosition(-HeighestWidthInts + 15, -SmallestHeightInts + 8 + 3);
+            //Console.SetCursorPosition(-HeighestWidthInts + 15, -SmallestHeightInts + 8 + 3);
             TrackPrint = new int[50, 60];
             checkPathVisual(track);
             return 0;
@@ -220,7 +220,7 @@ namespace Controller
         public static int[,] TrackPrint;
         public static void Direction(int getal,int x, int y, Section section) {
             for (int i = 0; i < 8; i++) {
-                Console.SetCursorPosition(y * 14, x * 7 + i);
+                Console.SetCursorPosition(y * 7, x * 7 + i);
                 switch (getal) {
                     case 0:
                         Console.Write(printCorrect(Blank[i], section));
@@ -276,18 +276,32 @@ namespace Controller
             section.Compass = Compass;
             Corner(sec, x , y, comp, section);
         }
-
-        private static string printCorrect(string print, Section section) {
+        //public voor tests
+        public static string printCorrect(string print, Section section) {
             string Name;
             string changed = print;
             if (section.SectionData.Left is not null)
             {
-                Name = section.SectionData.Left.Name;
-                changed = print.Replace("*", Name.Remove(1));
+                if (section.SectionData.Left.IsBroken)
+                {
+                    changed = print.Replace("*", "X");
+                }
+                else
+                {
+                    Name = section.SectionData.Left.Name;
+                    changed = print.Replace("*", Name.Remove(1));
+                }
             }
             if (section.SectionData.Right is not null) {
-                Name = section.SectionData.Right.Name;
-                changed = changed.Replace("+", Name.Remove(1));
+                if (section.SectionData.Right.IsBroken)
+                {
+                    changed = changed.Replace("+", "X");
+                }
+                else
+                {
+                    Name = section.SectionData.Right.Name;
+                    changed = changed.Replace("+", Name.Remove(1));
+                }
             }
             changed = changed.Replace("+", " ");
             changed = changed.Replace("*", " ");
@@ -441,183 +455,182 @@ namespace Controller
         public static string[] Blank =
         {
             
-                "              ",
-                "              ",
-                "              ",
-                "              ",
-                "              ",
-                "              ",
-                "              ",
-                "              "
-            
+                "       ",
+                "       ",   
+                "       ",
+                "       ",
+                "       ",
+                "       ",
+                "       ",
+                "       "
         };
 
         public static string[] Links = 
         {
-                 " |          | ",
-                 "-/          | ",
-                 "  *         | ",
-                 "            | ",
-                 "            / ",
-                 "          +/  ",
-                 "----------/   ",
-                 "              "
+                 " |   | ",
+                 "-/   | ",
+                 "*    | ",
+                 "     | ",
+                 "     / ",
+                 "   +/  ",
+                 "---/   ",
+                 "       "
             
         };
         public static string[] LinksV =
 {
-                 " |          | ",
-                 " |          \\-",
-                 " |         *  ",
-                 " |            ",
-                 " |            ",
-                 " \\+           ",
-                 "  \\-----------",
-                 "              "
+                 " |   | ",
+                 " |   \\-",
+                 " |   * ",
+                 " |     ",
+                 " |     ",
+                 " \\+    ",
+                 "  \\----",
+                 "       "
 
         };
         public static string[] RechtsV =
         {
-               "              ",
-                "----------\\   ",
-                "          *\\  ",
-                "            \\ ",
-                "            | ",
-                "            | ",
-                "-\\+         | ",
-                " |          | "
+                "       ",
+                "---\\   ",
+                "   *\\  ",
+                "     \\ ",
+                "     | ",
+                "     | ",
+                "-\\+  | ",
+                " |   | "
             
         };
         public static string[] Rechts =
 {
-                "              ",
-                "   /----------",
-                "  /*          ",
-                " /            ",
-                " |            ",
-                " |        +   ",
-                " |          /-",
-                " |          | "
+                "       ",
+                "   /---",
+                "  /*   ",
+                " /     ",
+                " |     ",
+                " |   + ",
+                " |   /-",
+                " |   | "
 
         };
         public static string[] LinksA =
 {
-                 " |          | ",
-                 "-/          | ",
-                 "  +         | ",
-                 "            | ",
-                 "            / ",
-                 "          */  ",
-                 "----------/   ",
-                 "              "
+                 " |   | ",
+                 "-/   | ",
+                 " +   | ",
+                 "     | ",
+                 "     / ",
+                 "   */  ",
+                 "---/   ",
+                 "       "
 
         };
         public static string[] LinksVA =
 {
-                 " |          | ",
-                 " |          \\-",
-                 " |         +  ",
-                 " |            ",
-                 " |            ",
-                 " \\*           ",
-                 "  \\-----------",
-                 "              "
+                 " |   | ",
+                 " |   \\-",
+                 " |  +  ",
+                 " |     ",
+                 " |     ",
+                 " \\*    ",
+                 "  \\----",
+                 "       "
 
         };
         public static string[] RechtsVA =
         {
-               "              ",
-                "----------\\   ",
-                "          +\\  ",
-                "            \\ ",
-                "            | ",
-                "            | ",
-                "-\\*         | ",
-                " |          | "
+                "       ",
+                "---\\   ",
+                "   +\\  ",
+                "     \\ ",
+                "     | ",
+                "     | ",
+                "-\\*  | ",
+                " |   | "
 
         };
         public static string[] RechtsA =
 {
-                "              ",
-                "   /----------",
-                "  /+          ",
-                " /            ",
-                " |            ",
-                " |        *   ",
-                " |          /-",
-                " |          | "
+                "       ",
+                "   /---",
+                "  /+   ",
+                " /     ",
+                " |     ",
+                " |  *  ",
+                " |   /-",
+                " |   | "
 
         };
         public static string[] Horizontaal =
         {
-                "              ",
-                "--------------",
-                "      *       ",
-                "              ",
-                "              ",
-                "      +       ",
-                "--------------",
-                "              "
-            
+                "       ",
+                "-------",
+                " *     ",
+                "       ",
+                "       ",
+                "  +    ",
+                "-------",
+                "       ",
+
         };
         public static string[] Verticaal =
         {
-                " |          | ",
-                " |          | ",
-                " |          | ",
-                " |*        +| ",
-                " |          | ",
-                " |          | ",
-                " |          | ",
-                " |          | "
+                " |   | ",
+                " |   | ",
+                " |   | ",
+                " |* +| ",
+                " |   | ",
+                " |   | ",
+                " |   | ",
+                " |   | "
             
         };
         public static string[] HorizontaalA =
 {
-                "              ",
-                "--------------",
-                "      +       ",
-                "              ",
-                "              ",
-                "      *       ",
-                "--------------",
-                "              "
+                "       ",
+                "-------",
+                " +     ",
+                "       ",
+                "       ",
+                " *     ",
+                "-------",
+                "       "
 
         };
         public static string[] VerticaalA =
         {
-                " |          | ",
-                " |          | ",
-                " |          | ",
-                " |+        *| ",
-                " |          | ",
-                " |          | ",
-                " |          | ",
-                " |          | "
+                " |   | ",
+                " |   | ",
+                " |   | ",
+                " |+ *| ",
+                " |   | ",
+                " |   | ",
+                " |   | ",
+                " |   | "
 
         };
         public static string[] Start =
         {
-                "              ",
-                "--------------",
-                "       *      ",
-                "              ",
-                "              ",
-                "       +      ",
-                "--------------",
-                "              "
+                "       ",
+                "-------",
+                "  *    ",
+                "       ",
+                "       ",
+                "  +    ",
+                "-------",
+                "       "
             
-        };
+        }; 
         public static string[] Finish =
         {
-                "              ",
-                "----------#---",
-                "       *  #   ",
-                "          #   ",
-                "          #   ",
-                "       +  #   ",
-                "----------#---",
-                "              "
+                "       ",
+                "----#--",
+                " *  #  ",
+                "    #  ",
+                "    #  ",
+                " +  #  ",
+                "----#--",
+                "       "
             
         };
     }

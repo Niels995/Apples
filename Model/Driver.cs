@@ -25,5 +25,7 @@ namespace Model
         public int Performance { get ; set; }
         public int Speed { get; set; }
         public int Finished { get; set; }
+        public int CurrentSection { get; set; }
+        public bool IsBroken { get; set; }
     }
 }

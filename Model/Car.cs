@@ -12,12 +12,14 @@ namespace Model
         public int Quality { get ; set ;}
         public int Performance { get; set; }
         public int Speed { get; set; }
+        public bool IsBroken { get; set; }
 
         public static IEquipment Equipments(int quality, int performance, int speed)
         {
             Equipment.Quality = quality;
             Equipment.Performance = performance;
             Equipment.Speed = speed;
+            Equipment.IsBroken = false;
             return Equipment;
         }
     }
