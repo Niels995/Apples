@@ -262,7 +262,8 @@ namespace Controller
                                 sec.SectionData.DistanceLeft += part.Performance * part.Speed;
                             }
                         }
-                    }else if (sec.SectionData.Right != null && part.Finished != RaceLength)
+                    }
+                    if (sec.SectionData.Right != null && part.Finished != RaceLength)
                     {
                         if (sec.SectionData.Right.Name == part.Name)
                         {
