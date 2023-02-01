@@ -30,7 +30,7 @@ namespace Controller
         public event EventHandler<RaceEventArgs> RaceDraw;
         public event EventHandler<DriversChangedEventArgs> DriversChanged;
 
-        public int RaceLength { get; set; } = 3;
+        public int RaceLength { get; set; } = 2;
         //Word niet gebruikt
         public SectionData GetSectionData(Section section)
         {
@@ -55,7 +55,7 @@ namespace Controller
             Start();
             Timer.Start();
             Console.ReadLine();
-            //Timer.Stop();
+            Timer.Stop();
         }
         private void Start()
         {
@@ -135,8 +135,8 @@ namespace Controller
                 MoveTrack(Track);
                 StartRace(x, y, Track);
             }
-            DriversChanged?.Invoke(this, new DriversChangedEventArgs(Track));
-            RaceDraw?.Invoke(this, new RaceEventArgs(Track));
+            //DriversChanged?.Invoke(this, new DriversChangedEventArgs(Track));
+            //RaceDraw?.Invoke(this, new RaceEventArgs(Track));
             Console.WriteLine("The Elapsed event was raised at {0:HH:mm:ss.fff}", e.SignalTime);
         }
         IParticipant _participantL = null;
@@ -174,15 +174,13 @@ namespace Controller
                 {
                     part.Finished = 0;
                     Finished = 0;
+                    Track = null;
+                    Timer.Stop();
                 }
                 DriversChanged = null;
                 Console.Clear();
                 Graphics.reset();
                 Track = Data.NextRace();
-                if (Track == null)
-                {
-                    Timer.Enabled = false;
-                }
             }
         }
         public Track Move(Track track ,IParticipant part) {
