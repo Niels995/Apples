@@ -190,7 +190,7 @@ namespace Controller
             //  int secnumberR = -5;
             if (part.Name.Equals("Henk")) {
                 part.Speed = 3;
-                part.Performance = 34;
+                part.Performance = 345;
             }
             if (!part.IsBroken)
             {
