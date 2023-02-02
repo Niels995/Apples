@@ -9,9 +9,14 @@ namespace Model
     public class DriversChangedEventArgs : EventArgs
     {
         public Track track { get; set; }
-        public DriversChangedEventArgs(Track Track)
+        public int x { get; set; }
+        public int y { get; set; }
+        public DriversChangedEventArgs()
         {
-            track = Track;
+            //int x, int y, Track Track
+            //this.x = x;
+            //this.y = y;
+            //track = Track;
         }
     }
 }

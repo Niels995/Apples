@@ -70,7 +70,7 @@ namespace Controller
             Track track = Comp.NextTrack();
             if (track != null)
             {
-                Graphics.Visualise(5, 5, track);
+                //Visual.Visualise(5, 5, track);
                 //CurrentRace.Track = track;
                 //CurrentRace.Participants= Participants;
                 CurrentRace = new Race(track, Participants);

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using static System.Collections.Specialized.BitVector32;
 using Section = Model.Section;
-using DriversChangedEventArgs = Model.DriversChangedEventArgs;
+//using DriversChangedEventArgs = Model.DriversChangedEventArgs;
 using Timer = System.Timers.Timer;
 
 namespace Controller
@@ -28,6 +28,9 @@ namespace Controller
         private Dictionary<Section, SectionData> _positions;
 
         public event EventHandler<RaceEventArgs> RaceDraw;
+
+        public delegate void TimedEvent(object? sender, ElapsedEventArgs e);
+
         public event EventHandler<DriversChangedEventArgs> DriversChanged;
 
         public int RaceLength { get; set; } = 2;
@@ -80,7 +83,7 @@ namespace Controller
         public string StartRace(int xStart, int yStart, Track track) {
             x = xStart;
             y = yStart;
-            Graphics.Visualise(xStart,yStart,track);
+            //Graphics.Visualise(xStart,yStart,track);
             Console.ForegroundColor = ConsoleColor.Green;
             return Participants.First().Name;
         }
@@ -132,11 +135,11 @@ namespace Controller
         public void OnTimedEvent(object sender, ElapsedEventArgs e) {
             if (Track != null)
             {
-                MoveTrack(Track);
-                StartRace(x, y, Track);
+                //MoveTrack(Track);
+                //StartRace(x, y, Track);
             }
-            //DriversChanged?.Invoke(this, new DriversChangedEventArgs(Track));
-            //RaceDraw?.Invoke(this, new RaceEventArgs(Track));
+            DriversChanged?.Invoke(sender, new DriversChangedEventArgs() { track = Track, x = this.x, y = this.y});
+            RaceDraw?.Invoke(sender, new RaceEventArgs(Track)); 
             Console.WriteLine("The Elapsed event was raised at {0:HH:mm:ss.fff}", e.SignalTime);
         }
         IParticipant _participantL = null;
@@ -179,7 +182,7 @@ namespace Controller
                 }
                 DriversChanged = null;
                 Console.Clear();
-                Graphics.reset();
+                //Graphics.reset();
                 Track = Data.NextRace();
             }
         }
