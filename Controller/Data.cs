@@ -35,8 +35,8 @@ namespace Controller
             AddTrack(_trackTest1);
             Comp = new Competition(Participants, Tracks);
             CurrentRace = new Race(Comp.NextTrack(), Participants);
-            CurrentRace.MakeTimer();
-            CurrentRace.DriversChanged += UpdateAndMoveTrack;
+            //CurrentRace.MakeTimer();
+            //CurrentRace.DriversChanged += UpdateAndMoveTrack;
         }
 
         public static void UpdateAndMoveTrack(object sender, DriversChangedEventArgs eventArgs)

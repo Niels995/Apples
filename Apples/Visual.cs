@@ -46,7 +46,6 @@ namespace Controller
             //participants.Add(AddParticipants("Klaas"));
             Race race1 = new Race(_trackTest, participants);
             //race1.StartRace(-HeighestWidthInts + 1, -SmallestHeightInts, _trackTest);
-            Console.WriteLine(race.Track.Name);
         }
         public static IParticipant AddParticipants(string naam)
         {

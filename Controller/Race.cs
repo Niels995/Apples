@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
@@ -33,6 +34,8 @@ namespace Controller
 
         public event EventHandler<DriversChangedEventArgs> DriversChanged;
 
+
+        public bool changeRace = false;
         public int RaceLength { get; set; } = 2;
         //Word niet gebruikt
         public SectionData GetSectionData(Section section)
@@ -57,17 +60,17 @@ namespace Controller
         public void MakeTimer() {
             Start();
             Timer.Start();
-            Console.ReadLine();
-            Timer.Stop();
+            //Console.ReadLine();
+            //Timer.Stop();
         }
         private void Start()
         {
             // Create a timer with a two second interval.
-            Timer = new System.Timers.Timer(500);
+            Timer = new System.Timers.Timer(200);
             // Hook up the Elapsed event for the timer. 
             Timer.Elapsed += OnTimedEvent;
-            Timer.AutoReset = true;
-            Timer.Enabled = true;
+            //Timer.AutoReset = true;
+            //Timer.Enabled = true;
         }
 
         public void RandomizeEquipment()
@@ -133,14 +136,21 @@ namespace Controller
         }
 
         public void OnTimedEvent(object sender, ElapsedEventArgs e) {
+
             if (Track != null)
             {
                 //MoveTrack(Track);
                 //StartRace(x, y, Track);
+                if (changeRace)
+                {
+                    RaceDraw?.Invoke(sender, new RaceEventArgs(Track));
+                    changeRace = false;
+                }
+                DriversChanged?.Invoke(sender, new DriversChangedEventArgs() { track = Track, x = this.x, y = this.y });
             }
-            DriversChanged?.Invoke(sender, new DriversChangedEventArgs() { track = Track, x = this.x, y = this.y});
-            RaceDraw?.Invoke(sender, new RaceEventArgs(Track)); 
-            Console.WriteLine("The Elapsed event was raised at {0:HH:mm:ss.fff}", e.SignalTime);
+
+
+            //Console.WriteLine("The Elapsed event was raised at {0:HH:mm:ss.fff}", e.SignalTime);
         }
         IParticipant _participantL = null;
         IParticipant _participantR = null;
@@ -180,10 +190,11 @@ namespace Controller
                     Track = null;
                     Timer.Stop();
                 }
-                DriversChanged = null;
+                //DriversChanged = null;
                 Console.Clear();
                 //Graphics.reset();
                 Track = Data.NextRace();
+                changeRace = true;
             }
         }
         public Track Move(Track track ,IParticipant part) {
