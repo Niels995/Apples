@@ -9,6 +9,19 @@
     <Grid
         x:Name="Container"
         Background="#FF00D8FF">
-        <Image x:Name ="TrackImage" Margin="150,0,0,0"/>
+        <!--<DockPanel>
+            <Menu DockPanel.Dock="Top"
+                  Height="20"
+                  VerticalAlignment="Top">
+                <MenuItem Header="Window">
+                    <MenuItem Header="Track statistics" Click="MenuItemTrackStatsClick" IsCheckable="True" />
+                    <MenuItem Header="Competition statistics" Click="MenuItemCompetitionStatsClick" />
+                    <MenuItem Header="Close all windows" Click="MenuItemExitClick" />
+                </MenuItem>
+            </Menu>
+        </DockPanel>-->
+        <Image x:Name="TrackImage" HorizontalAlignment="Left" Margin="10 30 10 10" VerticalAlignment="Top" />
+        <Label VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10 20 10 10"
+               Content="{Binding Path=TrackName}" />
     </Grid>
 </Window>

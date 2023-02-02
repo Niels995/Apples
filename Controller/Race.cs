@@ -135,8 +135,8 @@ namespace Controller
                 MoveTrack(Track);
                 StartRace(x, y, Track);
             }
-            //DriversChanged?.Invoke(this, new DriversChangedEventArgs(Track));
-            //RaceDraw?.Invoke(this, new RaceEventArgs(Track));
+            DriversChanged?.Invoke(this, new DriversChangedEventArgs(Track));
+            RaceDraw?.Invoke(this, new RaceEventArgs(Track));
             Console.WriteLine("The Elapsed event was raised at {0:HH:mm:ss.fff}", e.SignalTime);
         }
         IParticipant _participantL = null;

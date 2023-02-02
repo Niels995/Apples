@@ -81,24 +81,25 @@ namespace WPFAppels
             }
         }
 
-        //public static Bitmap GetPlayer(TeamColors tc, SectionTypes st)
-        //{
-        //    if (st == SectionTypes.LeftCorner || st == SectionTypes.RightCorner)
-        //    {
-        //        return AddImage(@$".\Graphics\Scaled\Cars\Corner\car_{tc.ToString().ToLower()}.png");
-        //    }
+        public static Bitmap GetPlayer(TeamColors tc, SectionTypes st)
+        {
+            if (st == SectionTypes.LeftCorner || st == SectionTypes.RightCorner)
+            {
+                return AddImage(@$".\Graphics\Scaled\Cars\Corner\car_{tc.ToString().ToLower()}.png");
+            }
 
-        //    return AddImage(@$".\Graphics\Scaled\Cars\Straight\car_{tc.ToString().ToLower()}.png");
-        //}
+            return AddImage(@$".\Graphics\Scaled\Cars\Straight\car_{tc.ToString().ToLower()}.png");
+        }
 
-        //public static Bitmap GetBrokenPlayer(SectionTypes st)
-        //{
-        //    if (st == SectionTypes.LeftCorner || st == SectionTypes.RightCorner)
-        //    {
-        //        return AddImage(@".\Graphics\Scaled\Cars\Corner\car_broken.png");
-        //    }
+        public static Bitmap GetBrokenPlayer(SectionTypes st)
+        {
+            if (st == SectionTypes.LeftCorner || st == SectionTypes.RightCorner)
+            {
+                return AddImage(@".\Graphics\Scaled\Cars\Corner\car_broken.png");
+            }
 
-        //    return AddImage(@".\Graphics\Scaled\Cars\Straight\car_broken.png");
-        //}
+            return AddImage(@".\Graphics\Scaled\Cars\Straight\car_broken.png");
+        }
+
     }
 }
